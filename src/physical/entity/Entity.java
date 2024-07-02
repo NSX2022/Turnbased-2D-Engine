@@ -17,4 +17,6 @@ public class Entity {
     public int col;
 
     public Inventory inventory;
+
+
 }

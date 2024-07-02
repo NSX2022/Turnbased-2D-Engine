@@ -6,5 +6,6 @@ import java.util.ArrayList;
 
 public class Inventory {
     public ArrayList<Item> items;
-    public int credits = 0;
+    //readme
+    public int sols;
 }

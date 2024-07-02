@@ -4,9 +4,7 @@ import physical.entity.Entity;
 import physical.item.Item;
 
 public class Grid {
-    public GridEntity[][] gridEntities;
-    public Item[][][] droppedItems;
-    public Entity[][] entities;
+    public Tile[][] tiles;
 
     public int sectorDifficulty;
     public float perlinValue;

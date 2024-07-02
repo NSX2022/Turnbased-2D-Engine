@@ -1,0 +1,1 @@
+Sols are the main currency, biological entities must consume to prevent UV radiation
