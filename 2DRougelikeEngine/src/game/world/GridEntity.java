@@ -10,4 +10,5 @@ public class GridEntity {
     public DisplayChar disChar;
     public int row;
     public int col;
+    public boolean collision = false;
 }

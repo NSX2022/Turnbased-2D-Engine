@@ -26,7 +26,7 @@ public class Main {
         //window.setIconImage(logo.getImage());
         window.setVisible(true);
 
-        gamePanel.setupGame();
+        gamePanel.newGame();
         gamePanel.startGameThread();
     }
 

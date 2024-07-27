@@ -6,6 +6,11 @@ public class DisplayChar {
     public char toDisplay;
     public Color color;
 
+    public DisplayChar(Color color, char c){
+        this.color = color;
+        toDisplay = c;
+    }
+
     public Color getGrayscale(){
         int val;
 

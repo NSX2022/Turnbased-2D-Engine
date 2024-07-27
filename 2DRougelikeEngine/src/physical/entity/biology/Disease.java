@@ -11,7 +11,7 @@ public class Disease {
     //can be transmitted across species
     public boolean crossSpecies = true;
     //is it a mechanical/artificial disease
-    public boolean nanobots = false;
+    public boolean artificial = false;
     //how easily can it spread by %? higher num = more infectious
     public int spreadChance = 1;
     //if an illness can spread to other BodyComponents

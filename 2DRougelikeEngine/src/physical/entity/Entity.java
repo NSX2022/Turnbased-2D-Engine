@@ -7,16 +7,21 @@ import java.util.ArrayList;
 
 public class Entity {
     public ArrayList<String> effects;
+    public ArrayList<String> tags;
     public Body body;
     public String name;
     //from -5 to 5. 0 is neutral
     public int moodLvl = 0;
-    public DisplayChar disChar;
+    public DisplayChar[] disChar;
 
     public int row;
     public int col;
 
     public Inventory inventory;
 
+    public void useItem(int itemID) {
+        switch (itemID){
 
+        }
+    }
 }

@@ -7,5 +7,5 @@ import java.util.ArrayList;
 public class Inventory {
     public ArrayList<Item> items;
     //readme
-    public int sols;
+    public int money;
 }
