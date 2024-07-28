@@ -7,6 +7,7 @@ import java.util.Random;
 public class World {
     public int worldRow = 11;
     public int worldCol = 11;
+    public String name;
 
     public Grid[][] grids = new Grid[worldRow][worldCol];
     public GamePanel gp;

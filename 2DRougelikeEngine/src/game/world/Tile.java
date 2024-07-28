@@ -8,8 +8,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Tile {
+    //stuff on the tile
     public ArrayList<Item> items;
     public GridEntity gridEntity = null;
+    public Entity entity = null;
+
     public boolean collision = false;
     public String name;
     public int tileID;
