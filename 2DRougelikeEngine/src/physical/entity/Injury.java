@@ -1,4 +1,4 @@
-package physical.entity.biology;
+package physical.entity;
 
 public class Injury {
     //how much more vulnerable this injury makes a creature to disease

@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     BufferedImage tempScreen;
 
     //Grid
-    public final int tileSize = 16;
+    public final int tileSize = 8;
     public World world;
 
     //GameState

@@ -22,12 +22,20 @@ public class World {
 
     public void genWorld() {
         rand = gp.rand;
+        int dif = 0;
         for(int i = 0; i < worldRow; i++){
             for(int j = 0; j < worldCol; j++) {
                 //TODO: use perlin for biome gen
                 Grid g = new Grid(gp);
                 g.genGrid(0);
+                g.worldX = i;
+                g.worldY = j;
+                g.sectorDifficulty = dif;
+
                 grids[i][j] = g;
+                if(gp.rand.nextInt(10) <= 5){
+                    dif++;
+                }
             }
         }
     }

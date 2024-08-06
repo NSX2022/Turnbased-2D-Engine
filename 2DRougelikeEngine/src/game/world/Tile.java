@@ -29,7 +29,8 @@ public class Tile {
     public static Tile newTile(int id){
         Tile toRet = null;
         Color tDisCol = null;
-        char tDisChar = 0;
+        char[] tDisChar = new char[99];
+
         switch (id){
             case 0:
                 //Grass
@@ -37,7 +38,7 @@ public class Tile {
                 toRet.tileID = id;
                 toRet.name = "Ground";
                 tDisCol = new Color(80, 48, 11, 255);
-                tDisChar = '█';
+                tDisChar[0] = '█';
                 break;
             case 1:
                 //Stone
@@ -45,7 +46,7 @@ public class Tile {
                 toRet.tileID = id;
                 toRet.name = "Stone";
                 tDisCol = new Color(147, 147, 147, 255);
-                tDisChar = '█';
+                tDisChar[0] = '█';
                 break;
             case 2:
                 break;

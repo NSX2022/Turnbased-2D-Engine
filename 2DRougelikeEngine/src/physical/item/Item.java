@@ -15,7 +15,7 @@ public class Item {
     public DisplayChar disChar;
 
     //for when on a grid
-    //set to -1 if in a inventory
+    //set to -1 if in an inventory
     public int row = -1;
     public int col = -1;
 }

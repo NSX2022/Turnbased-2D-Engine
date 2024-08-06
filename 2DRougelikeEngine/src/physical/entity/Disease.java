@@ -1,4 +1,4 @@
-package physical.entity.biology;
+package physical.entity;
 
 public class Disease {
     public String name;
