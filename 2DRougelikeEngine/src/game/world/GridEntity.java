@@ -11,7 +11,7 @@ public class GridEntity {
 
     public double health = 999999999;
     public ArrayList<String> features;
-    public DisplayChar disChar;
+    public DisplayChar disChar = new DisplayChar(null,null);
     public int row;
     public int col;
     public boolean collision = false;

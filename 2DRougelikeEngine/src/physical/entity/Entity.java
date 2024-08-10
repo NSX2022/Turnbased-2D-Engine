@@ -18,7 +18,7 @@ public class Entity {
     public boolean hasAI = false;
 
     //animation
-    public DisplayChar disChar;
+    public DisplayChar disChar = new DisplayChar(null,null);
 
     public int row;
     public int col;

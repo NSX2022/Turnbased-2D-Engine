@@ -1,5 +1,6 @@
 package physical.item;
 
+import game.Description;
 import system.DisplayChar;
 
 public class Item {
@@ -11,8 +12,11 @@ public class Item {
     public double weight;
     public int itemId;
 
+    //visual
     public String name;
-    public DisplayChar disChar;
+    public DisplayChar disChar = new DisplayChar(null,null);
+    public Description description;
+
 
     //for when on a grid
     //set to -1 if in an inventory
