@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
     public KeyHandler keyH = new KeyHandler(this);
     public SoundHandler music = new SoundHandler();
     public SoundHandler sfx = new SoundHandler();
+
     //fps and rendering
     private final int FPS = 60;
     public int latestFPS;
@@ -33,7 +34,8 @@ public class GamePanel extends JPanel implements Runnable {
     BufferedImage tempScreen;
 
     //Grid
-    public final int tileSize = 8;
+    public static final int tileSize = 8;
+    public static Font gameFont = new Font("URW Gothic", Font.PLAIN, tileSize);
     public World world;
 
     //GameState
@@ -68,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
         this.setBackground(Color.BLACK);
         tempScreen = new BufferedImage(SCREEN_WIDTH, SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        g2 = (Graphics2D)tempScreen.getGraphics();
 
         this.setVisible(true);
 
@@ -115,7 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private void update() {
         //KEEP UPDATE LOOP CLEAN
-        playerController.currentGrid.draw(g2);
+
     }
 
     public void newGame(){
@@ -155,6 +158,8 @@ public class GamePanel extends JPanel implements Runnable {
         if(keyH.checkDrawTime){
             drawStart = System.nanoTime();
         }
+        playerController.currentGrid.draw(g2);
+
     }
 
     public void drawToScreen() {

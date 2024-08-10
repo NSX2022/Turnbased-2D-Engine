@@ -33,6 +33,7 @@ public class Entity {
     public int speed;
 
     public Inventory inventory;
+    public int frame = 0;
 
     public void useItem(int itemID) {
         switch (itemID){

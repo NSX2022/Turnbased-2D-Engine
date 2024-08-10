@@ -62,11 +62,28 @@ public class Grid {
 
     }
 
-    public void addEntity(){
+    public void addEntity(int x, int y, int entId){
+        if(x == -1 && y == -1){
+            //Random position
 
+        }
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g){
+        for(int i = 0; i < rows-1; i++){
+            for(int j = 0; j < cols-1; j++){
+                tiles[i][j].draw(g);
+            }
+        }
+    }
 
+    public Point getClearTile(int x, int y){
+        Point toRet = new Point();
+        if(x == -1 && y == -1){
+            //Random position
+
+        }
+
+        return toRet;
     }
 }

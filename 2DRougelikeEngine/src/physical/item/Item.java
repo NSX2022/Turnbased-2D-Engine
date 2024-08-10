@@ -3,6 +3,8 @@ package physical.item;
 import game.Description;
 import system.DisplayChar;
 
+import java.util.ArrayList;
+
 public class Item {
     public int temp;
     public int meltingPoint;
@@ -20,6 +22,19 @@ public class Item {
 
     //for when on a grid
     //set to -1 if in an inventory
-    public int row = -1;
-    public int col = -1;
+    public int gridX = -1;
+    public int gridY = -1;
+
+    //Item library
+    public static Item newItem(int itemId){
+        Item toRet = null;
+
+        switch (itemId){
+            case 0:
+
+                break;
+        }
+
+        return toRet;
+    }
 }

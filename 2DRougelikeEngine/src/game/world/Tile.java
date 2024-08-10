@@ -1,6 +1,7 @@
 package game.world;
 
 import game.Description;
+import game.GamePanel;
 import physical.entity.Entity;
 import physical.item.Item;
 import system.DisplayChar;
@@ -18,6 +19,7 @@ public class Tile {
     public String name;
     public int tileID;
     public DisplayChar disChar = new DisplayChar(null,null);
+    public int frame = 0;
 
     public int gridX;
     public int gridY;
@@ -79,7 +81,8 @@ public class Tile {
                 toRet.tileID = id;
                 toRet.name = "Ground";
                 tDisCol = new Color(80, 48, 11, 255);
-                tDisChar[0] = '█';
+                //tDisChar[0] = '█';
+                tDisChar[0] = 'g';
                 break;
             case 1:
                 //Stone
@@ -94,6 +97,32 @@ public class Tile {
         }
         toRet.disChar = new DisplayChar(tDisCol,tDisChar);
         return toRet;
+    }
+
+    public void draw(Graphics g){
+        //in order, from the farthest back to foreground
+        //Tile char --> Item (highest in stack is drawn) --> GridEntity --> Entity
+
+        g.setFont(GamePanel.gameFont);
+
+        if(entity == null){
+            if(items == null || items.isEmpty()){
+                if(gridEntity == null){
+                    if(this.disChar != null){
+                        g.setColor(disChar.color);
+                        g.drawString(String.valueOf(disChar.toDisplay[frame]), gridX * GamePanel.tileSize, gridY * GamePanel.tileSize);
+                    }
+                }else{
+
+                }
+            }else{
+                g.setColor(items.getFirst().disChar.color);
+                g.drawString(String.valueOf(items.getFirst().disChar.toDisplay[0]), gridX * GamePanel.tileSize, gridY * GamePanel.tileSize);
+            }
+        }else{
+            g.setColor(entity.disChar.color);
+            g.drawString(String.valueOf(entity.disChar.toDisplay[entity.frame]), gridX * GamePanel.tileSize, gridY * GamePanel.tileSize);
+        }
     }
 
 }
