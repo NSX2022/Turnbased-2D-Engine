@@ -1,5 +1,6 @@
 package game.world;
 
+import game.Description;
 import physical.entity.Entity;
 import physical.item.Item;
 import system.DisplayChar;
@@ -20,6 +21,8 @@ public class Tile {
 
     public int gridX;
     public int gridY;
+
+    public Description description;
 
     public Tile(boolean collision){
         this.collision = collision;

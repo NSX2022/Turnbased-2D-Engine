@@ -1,5 +1,6 @@
 package game.world;
 
+import game.Description;
 import game.GamePanel;
 import physical.entity.Entity;
 import physical.item.Item;
@@ -19,6 +20,8 @@ public class Grid {
     public int worldX, worldY;
 
     GamePanel gp;
+
+    public Description description;
 
     public Grid(GamePanel gp){
         this.gp = gp;
@@ -54,6 +57,9 @@ public class Grid {
                 break;
         }
         //TODO: add plants/enemies/etc.
+
+        //Finalize
+
     }
 
     public void addEntity(){

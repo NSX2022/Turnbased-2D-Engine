@@ -2,6 +2,9 @@ package game;
 
 import game.world.*;
 import game.*;
+import physical.entity.Entity;
+import physical.entity.Inventory;
+import player.PlayerController;
 import system.*;
 import system.sound.*;
 
@@ -47,8 +50,14 @@ public class GamePanel extends JPanel implements Runnable {
     public final int SINGLE_GRID_TYPE = 1;
 
     //Factions
+    //low priority or cut later
     public int maxFactions = 1024;
     public Faction[] factions = new Faction[maxFactions];
+
+    //Gameplay
+    public boolean playerTurn = true;
+    public PlayerController playerController = new PlayerController();
+
 
     public GamePanel(){
         this.setVisible(false);
@@ -105,7 +114,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void update() {
-
+        //KEEP UPDATE LOOP CLEAN
+        playerController.currentGrid.draw(g2);
     }
 
     public void newGame(){
@@ -114,8 +124,26 @@ public class GamePanel extends JPanel implements Runnable {
         rand.setSeed(seed);
         world = new World(this);
         world.genWorld();
-        
+
+        Entity player = new Entity();
+        player.col = Grid.cols/2;
+        player.row = Grid.rows/2;
+        player.name = "newPlayer";
+        player.disChar.toDisplay = new char[]{'@'};
+        player.disChar.color = new Color(255, 0, 213);
+        player.hp = 10;
+        player.armor = 0;
+        player.dodge = 2;
+        player.hasAI = false;
+        player.inventory = new Inventory();
+        player.speed = 100;
+        player.maxHP = 10;
+
+        world.grids[2][2].tiles[Grid.rows/2][Grid.cols/2].entity = player;
+        playerController.currentGrid = world.grids[2][2];
+        playerController.playerBody = player;
     }
+
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
@@ -158,6 +186,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     //TODO
     public void nextTurn() {
+        if (playerTurn) {
 
+        } else {
+
+        }
     }
 }

@@ -5,4 +5,7 @@ public class Weapon extends Equipment {
     public int damageVariation;
     public int strCap;
     public int baseDmg;
+    public boolean ranged;
+
+
 }
