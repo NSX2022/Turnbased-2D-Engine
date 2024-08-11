@@ -1,5 +1,7 @@
 package physical.entity;
 
+import game.world.Faction;
+import game.world.Tile;
 import system.DisplayChar;
 
 import java.util.ArrayList;
@@ -29,11 +31,14 @@ public class Entity {
     public int dodge;
     public int armor;
 
-    //Average speed is 1000, higher numbers are slower, 0 is time stop. All speed is relative to the player. Speed comes from items and limbs.
+    //Average speed is 100, higher numbers are slower, 0 is time stop. All speed is relative to the player. Speed comes from items and limbs.
     public int speed;
+    public int turnPoints;
 
     public Inventory inventory;
     public int frame = 0;
+
+    public Faction faction;
 
     public void useItem(int itemID) {
         switch (itemID){
@@ -65,9 +70,16 @@ public class Entity {
         }
     }
 
+    public boolean canMove(Tile moveTo){
+        if(moveTo.gridEntity == null || !moveTo.gridEntity.collision){
+            if(moveTo.entity == null || !moveTo.entity.faction.hostile.contains(this.faction)){
 
+            }
+        }
+        return false;
+    }
 
     public void nextTurn() {
-
+        System.out.println(name + " took its turn");
     }
 }

@@ -5,6 +5,7 @@ import game.GamePanel;
 import physical.entity.Entity;
 import physical.item.Item;
 import system.DisplayChar;
+import system.vfx.GridParticle;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,6 +15,10 @@ public class Tile {
     public ArrayList<Item> items;
     public GridEntity gridEntity = null;
     public Entity entity = null;
+    public GridParticle gridParticle = null;
+
+    //when to show particle tick
+    public boolean particleTick;
 
     public boolean collision = false;
     public String name;
@@ -144,6 +149,11 @@ public class Tile {
         }else{
             g.setColor(entity.disChar.color);
             g.drawString(String.valueOf(entity.disChar.toDisplay[entity.frame]), gridX * GamePanel.tileSize + GamePanel.CHAR_OFFSET_X, gridY * GamePanel.tileSize + GamePanel.CHAR_OFFSET_Y);
+        }
+
+        if(gridParticle != null && particleTick){
+            g.setColor(gridParticle.disChar.color);
+            g.drawString(String.valueOf(gridParticle.disChar.toDisplay[gridParticle.frame]), gridX * GamePanel.tileSize + GamePanel.CHAR_OFFSET_X, gridY * GamePanel.tileSize + GamePanel.CHAR_OFFSET_Y);
         }
     }
 

@@ -11,7 +11,14 @@ import system.sound.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 import java.util.Random;
+
+import static game.world.Grid.cols;
+import static game.world.Grid.rows;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -53,14 +60,13 @@ public class GamePanel extends JPanel implements Runnable {
     public final int WORLD_TYPE = 0;
     public final int SINGLE_GRID_TYPE = 1;
 
-    //Factions
-    //low priority or cut later
-    public int maxFactions = 1024;
-    public Faction[] factions = new Faction[maxFactions];
+    //Factions stored in World
 
     //Gameplay
     public boolean playerTurn = true;
     public PlayerController playerController = new PlayerController();
+    public static boolean LOADING = false;
+    public int pointsPerTurn = 200;
 
 
     public GamePanel(){
@@ -115,6 +121,9 @@ public class GamePanel extends JPanel implements Runnable {
                     totalSeconds++;
                 }
             }
+            if(seconds % 2 == 0){
+                //TODO: grid particle tick, and nextFrame for other objects
+            }
         }
     }
 
@@ -127,12 +136,10 @@ public class GamePanel extends JPanel implements Runnable {
         rand = new Random();
         seed = rand.nextLong();
         rand.setSeed(seed);
-        world = new World(this);
-        world.genWorld();
 
         Entity player = new Entity();
-        player.col = Grid.cols/2;
-        player.row = Grid.rows/2;
+        player.col = cols/2;
+        player.row = rows/2;
         player.name = "newPlayer";
         player.disChar.toDisplay = new char[]{'@'};
         player.disChar.color = new Color(255, 0, 213);
@@ -144,8 +151,11 @@ public class GamePanel extends JPanel implements Runnable {
         player.speed = 100;
         player.maxHP = 10;
 
-        world.grids[2][2].tiles[Grid.rows/2][Grid.cols/2].entity = player;
-        playerController.currentGrid = world.grids[2][2];
+        world = new World(this);
+        world.genWorld();
+
+        world.grids[2][2][0].tiles[rows/2][cols/2].entity = player;
+        playerController.currentGrid = world.grids[2][2][0];
         playerController.playerBody = player;
     }
 
@@ -160,7 +170,9 @@ public class GamePanel extends JPanel implements Runnable {
         if(keyH.checkDrawTime){
             drawStart = System.nanoTime();
         }
-        playerController.currentGrid.draw(g2);
+        if(/*gameState == PLAY_STATE*/true) {
+            playerController.currentGrid.draw(g2);
+        }
 
     }
 
@@ -193,10 +205,43 @@ public class GamePanel extends JPanel implements Runnable {
 
     //TODO
     public void nextTurn() {
-        if (playerTurn) {
+        //1 Local variable to track turn points for each entity
+        Map<Entity, Integer> entityPoints = new HashMap<>();
 
-        } else {
+        // Initialize the map with current turnPoints
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                Tile tile = playerController.currentGrid.tiles[i][j];
+                if (tile.entity != null) {
+                    Entity entity = tile.entity;
+                    int currentPoints = entity.turnPoints + entity.speed;
+                    entityPoints.put(entity, currentPoints);
+                }
+            }
+        }
 
+        // Step 2: Process turns based on accumulated points
+        List<Map.Entry<Entity, Integer>> sortedEntities = new ArrayList<>(entityPoints.entrySet());
+        sortedEntities.sort((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue())); // Higher points first
+
+        for (Map.Entry<Entity, Integer> entry : sortedEntities) {
+            Entity entity = entry.getKey();
+            int points = entry.getValue();
+            if (points >= pointsPerTurn) {
+                if (entity == playerController.playerBody) {
+                    // If it's the player's turn
+                    playerTurn = true;
+                    entity.turnPoints = points - 1000; // Deduct points used for the turn
+                } else {
+                    // If it's another entity's turn
+                    playerTurn = false;
+                    entity.nextTurn();
+                    // Update the entity's turn points
+                    entity.turnPoints = points - 1000; // Deduct points used for the turn
+                }
+            }else{
+                entity.turnPoints = points;
+            }
         }
     }
 }

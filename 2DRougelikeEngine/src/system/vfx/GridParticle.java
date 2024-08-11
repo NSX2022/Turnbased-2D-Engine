@@ -8,6 +8,7 @@ public class GridParticle {
 
     public int gridX;
     public int gridY;
+    public int turnsLeft = 0;
 
     public int largest()
     {

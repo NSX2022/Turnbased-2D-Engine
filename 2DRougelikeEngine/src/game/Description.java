@@ -17,6 +17,7 @@ public class Description {
     public StatSheet statReqs;
 
     public Description(){
+        desc = new ArrayList<>();
         statReqs = new StatSheet();
         statReqs.arc = 0;
         statReqs.dex = 0;
@@ -35,6 +36,12 @@ public class Description {
 
         }else if(object.getClass().equals(Entity.class)){
 
+        }else if(object.getClass().equals(String.class)){
+            switch ((String)object){
+                case "player":
+                    desc.add("You and your followers");
+                    break;
+            }
         }
     }
 
