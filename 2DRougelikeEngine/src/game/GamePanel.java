@@ -229,15 +229,16 @@ public class GamePanel extends JPanel implements Runnable {
             int points = entry.getValue();
             if (points >= pointsPerTurn) {
                 if (entity == playerController.playerBody) {
-                    // If it's the player's turn
+                    //player's turn
                     playerTurn = true;
                     entity.turnPoints = points - 1000; // Deduct points used for the turn
                 } else {
-                    // If it's another entity's turn
+                    //another entities turn
                     playerTurn = false;
                     entity.nextTurn();
-                    // Update the entity's turn points
+                    //Update the entity's turn points
                     entity.turnPoints = points - 1000; // Deduct points used for the turn
+                    nextTurn();
                 }
             }else{
                 entity.turnPoints = points;
