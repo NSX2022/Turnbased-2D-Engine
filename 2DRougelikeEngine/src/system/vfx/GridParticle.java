@@ -6,7 +6,8 @@ public class GridParticle {
     public DisplayChar disChar;
     public int frame = 0;
 
-
+    public int gridX;
+    public int gridY;
 
     public int largest()
     {

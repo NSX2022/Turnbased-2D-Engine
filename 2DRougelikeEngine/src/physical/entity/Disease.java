@@ -14,8 +14,6 @@ public class Disease {
     public boolean artificial = false;
     //how easily can it spread by %? higher num = more infectious
     public int spreadChance = 1;
-    //if an illness can spread to other BodyComponents
-    public int bodySpreadChance = 1;
 
     @Override
     public String toString() {

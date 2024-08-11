@@ -65,6 +65,8 @@ public class Entity {
         }
     }
 
+
+
     public void nextTurn() {
 
     }

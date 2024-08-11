@@ -8,6 +8,7 @@ public class Equipment extends Item {
     public int durability = -1;
 
     public StatSheet statBonuses;
+    public int critChanceBonus;
 
     public Equipment() {
         stackable = false;
