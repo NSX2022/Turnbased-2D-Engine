@@ -99,6 +99,27 @@ public class Tile {
         return toRet;
     }
 
+    public int largest()
+    {
+        int max = 0;
+
+        for (int i = 0; i < disChar.toDisplay.length; i++){
+            if (disChar.toDisplay[i] != 0) {
+                max = i;
+            }
+        }
+
+        return max;
+    }
+
+    public void nextFrame() {
+        if(frame < largest()) {
+            frame++;
+        }else{
+            frame = 0;
+        }
+    }
+
     public void draw(Graphics g){
         //in order, from the farthest back to foreground
         //Tile char --> Item (highest in stack is drawn) --> GridEntity --> Entity
