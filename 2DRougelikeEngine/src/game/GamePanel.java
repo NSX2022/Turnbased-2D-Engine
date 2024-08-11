@@ -34,9 +34,11 @@ public class GamePanel extends JPanel implements Runnable {
     BufferedImage tempScreen;
 
     //Grid
-    public static final int tileSize = 8;
+    public static final int tileSize = 16;
     public static Font gameFont = new Font("URW Gothic", Font.PLAIN, tileSize);
     public World world;
+    public final static int CHAR_OFFSET_X = tileSize*10;
+    public final static int CHAR_OFFSET_Y = tileSize*2;
 
     //GameState
     public int gameState;

@@ -16,4 +16,5 @@ public class GridEntity {
     public int col;
     public boolean collision = false;
     public Description description;
+    public int frame = 0;
 }

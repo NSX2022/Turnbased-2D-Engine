@@ -81,8 +81,8 @@ public class Tile {
                 toRet.tileID = id;
                 toRet.name = "Ground";
                 tDisCol = new Color(80, 48, 11, 255);
-                //tDisChar[0] = '█';
-                tDisChar[0] = 'g';
+                tDisChar[0] = '█';
+                //tDisChar[0] = 'g';
                 break;
             case 1:
                 //Stone
@@ -110,18 +110,19 @@ public class Tile {
                 if(gridEntity == null){
                     if(this.disChar != null){
                         g.setColor(disChar.color);
-                        g.drawString(String.valueOf(disChar.toDisplay[frame]), gridX * GamePanel.tileSize, gridY * GamePanel.tileSize);
+                        g.drawString(String.valueOf(disChar.toDisplay[frame]), gridX * GamePanel.tileSize + GamePanel.CHAR_OFFSET_X, gridY * GamePanel.tileSize + GamePanel.CHAR_OFFSET_Y);
                     }
                 }else{
-
+                    g.setColor(gridEntity.disChar.color);
+                    g.drawString(String.valueOf(gridEntity.disChar.toDisplay[gridEntity.frame]), gridX * GamePanel.tileSize + GamePanel.CHAR_OFFSET_X, gridY * GamePanel.tileSize + GamePanel.CHAR_OFFSET_Y);
                 }
             }else{
                 g.setColor(items.getFirst().disChar.color);
-                g.drawString(String.valueOf(items.getFirst().disChar.toDisplay[0]), gridX * GamePanel.tileSize, gridY * GamePanel.tileSize);
+                g.drawString(String.valueOf(items.getFirst().disChar.toDisplay[0]), gridX * GamePanel.tileSize + GamePanel.CHAR_OFFSET_X, gridY * GamePanel.tileSize + GamePanel.CHAR_OFFSET_Y);
             }
         }else{
             g.setColor(entity.disChar.color);
-            g.drawString(String.valueOf(entity.disChar.toDisplay[entity.frame]), gridX * GamePanel.tileSize, gridY * GamePanel.tileSize);
+            g.drawString(String.valueOf(entity.disChar.toDisplay[entity.frame]), gridX * GamePanel.tileSize + GamePanel.CHAR_OFFSET_X, gridY * GamePanel.tileSize + GamePanel.CHAR_OFFSET_Y);
         }
     }
 

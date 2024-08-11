@@ -12,7 +12,7 @@ public class Grid {
     public int sectorDifficulty;
     public float perlinValue;
 
-    public static final int rows = 15;
+    public static final int rows = 48;
     public static final int cols = rows;
 
     public Tile[][] tiles = new Tile[rows][cols];
