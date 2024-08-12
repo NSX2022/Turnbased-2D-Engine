@@ -79,7 +79,11 @@ public class Entity {
         return false;
     }
 
+    //TODO
     public void nextTurn() {
-        System.out.println(name + " took its turn");
+        //System.out.println(name + " took its turn");
+        if(hasAI){
+
+        }
     }
 }

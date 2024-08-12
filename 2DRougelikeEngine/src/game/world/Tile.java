@@ -51,7 +51,7 @@ public class Tile {
                 toRet.name = "Right";
                 tDisCol = new Color(1,1,1);
                 tDisChar[0] = '�';
-                toRet.tags.add("nextGridRIGHT");
+                toRet.tags.add("nextRIGHT");
                 break;
             case -3:
                 //nextGridLEFT
@@ -60,7 +60,7 @@ public class Tile {
                 toRet.name = "Left";
                 tDisCol = new Color(1,1,1);
                 tDisChar[0] = '�';
-                toRet.tags.add("nextGridLEFT");
+                toRet.tags.add("nextLEFT");
                 break;
             case -2:
                 //nextGridDOWN
@@ -69,7 +69,7 @@ public class Tile {
                 toRet.name = "Down";
                 tDisCol = new Color(1,1,1);
                 tDisChar[0] = '�';
-                toRet.tags.add("nextGridDOWN");
+                toRet.tags.add("nextDOWN");
                 break;
             case -1:
                 //nextGridUP
@@ -78,10 +78,10 @@ public class Tile {
                 toRet.name = "Up";
                 tDisCol = new Color(1,1,1);
                 tDisChar[0] = '�';
-                toRet.tags.add("nextGridUP");
+                toRet.tags.add("nextUP");
                 break;
             case 0:
-                //Grass
+                //Ground
                 toRet = new Tile(false);
                 toRet.tileID = id;
                 toRet.name = "Ground";

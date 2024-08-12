@@ -19,7 +19,6 @@ public class GridParticle {
                 max = i;
             }
         }
-
         return max;
     }
 

@@ -6,6 +6,7 @@ import physical.entity.Entity;
 import physical.entity.Inventory;
 import player.PlayerController;
 import system.*;
+import system.menus.TitleScreen;
 import system.sound.*;
 
 import javax.swing.*;
@@ -66,6 +67,10 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean playerTurn = true;
     public PlayerController playerController = new PlayerController();
     public static boolean LOADING = false;
+    public TitleScreen titleScreen;
+
+    //random animations or switch every 2 secs?
+    public boolean staticAnims = false;
 
     //governs speed
     public int pointsPerTurn = 1000;
@@ -123,8 +128,35 @@ public class GamePanel extends JPanel implements Runnable {
                     totalSeconds++;
                 }
             }
-            if(seconds % 2 == 0){
+            if(totalSeconds % 2 == 0){
                 //TODO: grid particle tick, and nextFrame for other objects
+                if(!LOADING && gameState == PLAY_STATE){
+                    Tile[][] toAnimate = playerController.currentGrid.tiles;
+                    for(int i = 0; i < rows; i++){
+                        for(int k = 0; k < cols; k++){
+                            if(toAnimate[i][k].gridParticle != null && toAnimate[i][k].gridParticle.largest() > 0){
+                                if(rand.nextBoolean() || staticAnims) {
+                                    toAnimate[i][k].gridParticle.nextFrame();
+                                }
+                            }
+                            if(toAnimate[i][k].largest() > 0){
+                                if(rand.nextBoolean() || staticAnims) {
+                                    toAnimate[i][k].nextFrame();
+                                }
+                            }
+                            if(toAnimate[i][k].entity != null && toAnimate[i][k].entity.largest() > 0){
+                                if(rand.nextBoolean() || staticAnims) {
+                                    toAnimate[i][k].entity.nextFrame();
+                                }
+                            }
+                            if(toAnimate[i][k].gridEntity != null && toAnimate[i][k].gridEntity.largest() > 0){
+                                if(rand.nextBoolean() || staticAnims) {
+                                    toAnimate[i][k].gridEntity.nextFrame();
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -135,9 +167,11 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void newGame(){
+        LOADING = true;
         rand = new Random();
         seed = rand.nextLong();
         rand.setSeed(seed);
+        titleScreen = new TitleScreen();
 
         Entity player = new Entity();
         player.col = cols/2;
@@ -151,7 +185,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.hasAI = false;
         player.inventory = new Inventory();
         player.speed = 100;
-        player.maxHP = 10;
+        player.maxHP = player.hp;
 
         world = new World(this);
         world.genWorld();
@@ -159,6 +193,8 @@ public class GamePanel extends JPanel implements Runnable {
         world.grids[2][2][0].tiles[rows/2][cols/2].entity = player;
         playerController.currentGrid = world.grids[2][2][0];
         playerController.playerBody = player;
+
+        LOADING = false;
     }
 
     public void startGameThread(){
@@ -172,8 +208,11 @@ public class GamePanel extends JPanel implements Runnable {
         if(keyH.checkDrawTime){
             drawStart = System.nanoTime();
         }
-        if(/*gameState == PLAY_STATE*/true) {
+        if(/*gameState == PLAY_STATE*/true && !LOADING){
             playerController.currentGrid.draw(g2);
+        }
+        if(gameState == TITLE_STATE){
+            titleScreen.draw(g2);
         }
 
     }

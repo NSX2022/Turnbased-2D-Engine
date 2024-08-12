@@ -15,6 +15,7 @@ public class GridEntity {
     public int row;
     public int col;
     public boolean collision = false;
+    public boolean isPlant = false;
     public Description description;
     public int frame = 0;
     public int armor = 9999;
