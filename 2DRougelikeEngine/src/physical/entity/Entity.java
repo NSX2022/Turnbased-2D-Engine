@@ -73,7 +73,7 @@ public class Entity {
     public boolean canMove(Tile moveTo){
         if(moveTo.gridEntity == null || !moveTo.gridEntity.collision){
             if(moveTo.entity == null || !moveTo.entity.faction.hostile.contains(this.faction)){
-
+                return !moveTo.collision;
             }
         }
         return false;

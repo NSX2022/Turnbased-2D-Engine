@@ -66,7 +66,9 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean playerTurn = true;
     public PlayerController playerController = new PlayerController();
     public static boolean LOADING = false;
-    public int pointsPerTurn = 200;
+
+    //governs speed
+    public int pointsPerTurn = 1000;
 
 
     public GamePanel(){
@@ -203,16 +205,16 @@ public class GamePanel extends JPanel implements Runnable {
         sfx.stop();
     }
 
-    //TODO
+    //possibly complete
     public void nextTurn() {
-        //1 Local variable to track turn points for each entity
+        //local variable to track turn points for each entity
         Map<Entity, Integer> entityPoints = new HashMap<>();
 
         // Initialize the map with current turnPoints
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+        for(int i = 0; i < rows; i++){
+            for (int j = 0; j < cols; j++){
                 Tile tile = playerController.currentGrid.tiles[i][j];
-                if (tile.entity != null) {
+                if (tile.entity != null){
                     Entity entity = tile.entity;
                     int currentPoints = entity.turnPoints + entity.speed;
                     entityPoints.put(entity, currentPoints);
@@ -222,27 +224,34 @@ public class GamePanel extends JPanel implements Runnable {
 
         // Step 2: Process turns based on accumulated points
         List<Map.Entry<Entity, Integer>> sortedEntities = new ArrayList<>(entityPoints.entrySet());
-        sortedEntities.sort((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue())); // Higher points first
+        sortedEntities.sort((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue())); //Higher points first
 
-        for (Map.Entry<Entity, Integer> entry : sortedEntities) {
+        for(Map.Entry<Entity, Integer> entry : sortedEntities){
             Entity entity = entry.getKey();
             int points = entry.getValue();
             if (points >= pointsPerTurn) {
-                if (entity == playerController.playerBody) {
+                if(entity == playerController.playerBody){
                     //player's turn
                     playerTurn = true;
-                    entity.turnPoints = points - 1000; // Deduct points used for the turn
+                    entity.turnPoints = points - pointsPerTurn; //reset but keep remainder
+                    //System.out.println("player turn processed");
                 } else {
                     //another entities turn
                     playerTurn = false;
                     entity.nextTurn();
                     //Update the entity's turn points
-                    entity.turnPoints = points - 1000; // Deduct points used for the turn
+                    entity.turnPoints = points - pointsPerTurn; //reset but keep remainder
+                    //System.out.println("repeat method");
                     nextTurn();
                 }
             }else{
                 entity.turnPoints = points;
+                if(entity == playerController.playerBody){
+                    nextTurn();
+                }
             }
+            //System.out.println(entity.name);
         }
+        //System.out.println("finish method");
     }
 }
