@@ -35,7 +35,7 @@ public class Grid {
                 //Ground
                 for(int i = 0; i < rows; i++){
                     for(int j = 0; j < cols; j++){
-                        t = Tile.newTile(0);
+                        t = Tile.newTile(0, gp);
                         t.gridX = i;
                         t.gridY = j;
                         tiles[i][j] = t;
@@ -46,7 +46,7 @@ public class Grid {
                 //Stone
                 for(int i = 0; i < rows -1; i++){
                     for(int j = 0; j < cols -1; j++){
-                        t = Tile.newTile(1);
+                        t = Tile.newTile(1, gp);
                         t.gridX = i;
                         t.gridY = j;
                         tiles[i][j] = t;

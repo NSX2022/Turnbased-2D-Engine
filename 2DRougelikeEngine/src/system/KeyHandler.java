@@ -11,6 +11,7 @@ public class KeyHandler implements KeyListener {
     GamePanel gp;
 
     public boolean checkDrawTime = false;
+    public int storedCode = -9999;
 
     public KeyHandler(GamePanel gp){
         this.gp = gp;
@@ -35,8 +36,17 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_ESCAPE){
             //TODO: Save and exit
             System.exit(0);
-        }else if(code == KeyEvent.VK_ENTER){
-            gp.nextTurn();
+        }else if(gp.gameState == gp.PLAY_STATE){
+            if(code == KeyEvent.VK_ENTER && storedCode != -9999) {
+                gp.nextTurn();
+            }else{
+                if(storedCode != -9999) {
+                    storedCode = code;
+                    gp.playerController.processInput(code);
+                }else{
+                    System.out.println("Player did not choose input");
+                }
+            }
             //System.out.println("pressed ENTER");
         }
     }

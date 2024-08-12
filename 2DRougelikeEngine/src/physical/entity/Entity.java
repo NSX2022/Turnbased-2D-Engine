@@ -8,16 +8,20 @@ import java.util.ArrayList;
 
 public class Entity {
 
-    public ArrayList<String> effects;
-    public ArrayList<String> tags;
+    //e.g poisoned, cursed
+    public ArrayList<String> effects = new ArrayList<>();
 
-    public ArrayList<Injury> injuries;
-    public ArrayList<Disease> diseases;
+    //e.g infernal, humanoid
+    public ArrayList<String> tags = new ArrayList<>();
+
+    public ArrayList<Injury> injuries = new ArrayList<>();
+    public ArrayList<Disease> diseases = new ArrayList<>();
 
     public String name;
 
     //AI
     public boolean hasAI = false;
+    public Faction faction;
 
     //animation
     public DisplayChar disChar = new DisplayChar(null,null);
@@ -37,8 +41,6 @@ public class Entity {
 
     public Inventory inventory;
     public int frame = 0;
-
-    public Faction faction;
 
     public void useItem(int itemID) {
         switch (itemID){
@@ -68,15 +70,6 @@ public class Entity {
         }else{
             frame = 0;
         }
-    }
-
-    public boolean canMove(Tile moveTo){
-        if(moveTo.gridEntity == null || !moveTo.gridEntity.collision){
-            if(moveTo.entity == null || !moveTo.entity.faction.hostile.contains(this.faction)){
-                return !moveTo.collision;
-            }
-        }
-        return false;
     }
 
     //TODO

@@ -186,6 +186,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.inventory = new Inventory();
         player.speed = 100;
         player.maxHP = player.hp;
+        player.tags.add("humanoid");
 
         world = new World(this);
         world.genWorld();
@@ -261,7 +262,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        // Step 2: Process turns based on accumulated points
+        //process turns based on accumulated points
         List<Map.Entry<Entity, Integer>> sortedEntities = new ArrayList<>(entityPoints.entrySet());
         sortedEntities.sort((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue())); //Higher points first
 

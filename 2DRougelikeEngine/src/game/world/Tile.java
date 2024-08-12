@@ -31,14 +31,17 @@ public class Tile {
 
     public Description description;
 
+    GamePanel gamePanel;
+
     public ArrayList<String> tags;
 
-    public Tile(boolean collision){
+    public Tile(boolean collision, GamePanel gp){
         this.collision = collision;
+        gamePanel = gp;
     }
 
 
-    public static Tile newTile(int id){
+    public static Tile newTile(int id, GamePanel gp){
         Tile toRet = null;
         Color tDisCol = null;
         char[] tDisChar = new char[99];
@@ -46,43 +49,43 @@ public class Tile {
         switch (id){
             case -4:
                 //nextGridUP
-                toRet = new Tile(false);
+                toRet = new Tile(false, gp);
                 toRet.tileID = id;
                 toRet.name = "Right";
-                tDisCol = new Color(1,1,1);
+                tDisCol = new Color(255, 255, 255);
                 tDisChar[0] = '�';
                 toRet.tags.add("nextRIGHT");
                 break;
             case -3:
                 //nextGridLEFT
-                toRet = new Tile(false);
+                toRet = new Tile(false, gp);
                 toRet.tileID = id;
                 toRet.name = "Left";
-                tDisCol = new Color(1,1,1);
+                tDisCol = new Color(255, 255, 255);
                 tDisChar[0] = '�';
                 toRet.tags.add("nextLEFT");
                 break;
             case -2:
                 //nextGridDOWN
-                toRet = new Tile(false);
+                toRet = new Tile(false, gp);
                 toRet.tileID = id;
                 toRet.name = "Down";
-                tDisCol = new Color(1,1,1);
+                tDisCol = new Color(255, 255, 255);
                 tDisChar[0] = '�';
                 toRet.tags.add("nextDOWN");
                 break;
             case -1:
                 //nextGridUP
-                toRet = new Tile(false);
+                toRet = new Tile(false, gp);
                 toRet.tileID = id;
                 toRet.name = "Up";
-                tDisCol = new Color(1,1,1);
+                tDisCol = new Color(255, 255, 255);
                 tDisChar[0] = '�';
                 toRet.tags.add("nextUP");
                 break;
             case 0:
                 //Ground
-                toRet = new Tile(false);
+                toRet = new Tile(false, gp);
                 toRet.tileID = id;
                 toRet.name = "Ground";
                 tDisCol = new Color(80, 48, 11, 255);
@@ -91,7 +94,7 @@ public class Tile {
                 break;
             case 1:
                 //Stone
-                toRet = new Tile(false);
+                toRet = new Tile(false, gp);
                 toRet.tileID = id;
                 toRet.name = "Stone";
                 tDisCol = new Color(147, 147, 147, 255);
@@ -123,6 +126,19 @@ public class Tile {
         }else{
             frame = 0;
         }
+    }
+
+    public boolean hasSolid(){
+        if(collision){
+            return true;
+        }
+        if(gridEntity != null && !gridEntity.collision){
+            return true;
+        }
+        if(this.entity != null && this.entity.faction.hostile.contains(gamePanel.playerController.playerBody.faction)){
+            return true;
+        }
+        return false;
     }
 
     public void draw(Graphics g){
