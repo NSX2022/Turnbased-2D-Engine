@@ -35,7 +35,7 @@ public class KeyHandler implements KeyListener {
         }else if(code == KeyEvent.VK_ENTER){
             //Store users gameplay action and then the user goes to the next turn and confirms action by pressing enter
             gp.nextTurn();
-            System.out.println("pressed ENTER");
+            //System.out.println("pressed ENTER");
         }
         //TODO: Do player action
         //use gp.nextTurn(); if the action is a gameplay action
