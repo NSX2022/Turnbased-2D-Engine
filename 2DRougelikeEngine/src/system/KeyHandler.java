@@ -37,16 +37,10 @@ public class KeyHandler implements KeyListener {
             //TODO: Save and exit
             System.exit(0);
         }else if(gp.gameState == gp.PLAY_STATE){
-            if(code == KeyEvent.VK_ENTER && storedCode != -9999) {
-                gp.nextTurn();
-            }else{
-                if(storedCode != -9999) {
-                    storedCode = code;
-                    gp.playerController.processInput(code);
-                }else{
-                    System.out.println("Player did not choose input");
-                }
-            }
+            storedCode = code;
+            gp.playerController.processInput(code);
+            gp.nextTurn();
+
             //System.out.println("pressed ENTER");
         }
     }
