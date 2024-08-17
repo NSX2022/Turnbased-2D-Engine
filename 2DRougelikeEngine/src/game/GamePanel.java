@@ -77,6 +77,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public GamePanel(){
+        playerController.gp = this;
+        keyH = new KeyHandler(this);
         this.setVisible(false);
         this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
         gameState = 0;
@@ -89,7 +91,8 @@ public class GamePanel extends JPanel implements Runnable {
 
         this.setVisible(true);
 
-        gameState = TITLE_STATE;
+        //gameState = TITLE_STATE;
+        gameState = PLAY_STATE;
     }
 
     @Override

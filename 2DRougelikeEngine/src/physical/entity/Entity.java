@@ -34,6 +34,7 @@ public class Entity {
     public int hp;
     public int dodge;
     public int armor;
+    public int eyes = 2; //affects Perception stat
 
     //Average speed is 100, higher numbers are slower, 0 is time stop. All speed is relative to the player. Speed comes from items and limbs.
     public int speed;

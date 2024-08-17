@@ -41,7 +41,7 @@ public class KeyHandler implements KeyListener {
             gp.playerController.processInput(code);
             gp.nextTurn();
 
-            //System.out.println("pressed ENTER");
+            //System.out.println("keyCode == "+code);
         }
     }
 }

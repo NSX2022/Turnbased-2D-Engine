@@ -86,4 +86,10 @@ public class Grid {
 
         return toRet;
     }
+
+    //for offscreen grids
+    //TODO
+    public void simulateGrid(){
+
+    }
 }

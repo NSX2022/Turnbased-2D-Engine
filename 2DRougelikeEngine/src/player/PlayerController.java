@@ -11,10 +11,11 @@ public class PlayerController {
     public Entity playerBody;
     public Grid currentGrid;
 
-    GamePanel gp;
+    public GamePanel gp;
 
     public boolean canDo(int actionCode){
         //TODO
+        Tile moveTo = new Tile(false,null);
         switch (actionCode){
             //0-9 keys
             case KeyEvent.VK_0:
@@ -39,16 +40,25 @@ public class PlayerController {
             case KeyEvent.VK_9:
                 break;
             case KeyEvent.VK_W:
-
+                moveTo = currentGrid.tiles[playerBody.row][playerBody.col-1];
+                if(moveTo == null || moveTo.hasSolid()){
+                    return false;
+                }
                 break;
             case KeyEvent.VK_A:
-
+                moveTo = currentGrid.tiles[playerBody.row-1][playerBody.col];
+                if(moveTo == null || moveTo.hasSolid()){
+                    return false;
+                }
                 break;
             case KeyEvent.VK_S:
-
+                moveTo = currentGrid.tiles[playerBody.row][playerBody.col+1];
+                if(moveTo == null || moveTo.hasSolid()){
+                    return false;
+                }
                 break;
             case KeyEvent.VK_D:
-                Tile moveTo = currentGrid.tiles[playerBody.row + 1][playerBody.col];
+                moveTo = currentGrid.tiles[playerBody.row + 1][playerBody.col];
                 if(moveTo == null || moveTo.hasSolid()){
                     return false;
                 }
