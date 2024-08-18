@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     public SoundHandler sfx = new SoundHandler();
 
     //fps and rendering
-    private final int FPS = 60;
+    private final int FPS = 30;
     public int latestFPS;
     Graphics2D g2;
     Thread gameThread;
@@ -73,7 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean staticAnims = false;
 
     //governs speed
-    public int pointsPerTurn = 1000;
+    public int pointsPerTurn = 5000;
 
 
     public GamePanel(){
@@ -103,8 +103,8 @@ public class GamePanel extends JPanel implements Runnable {
         long currentTime;
         long timer = 0;
         int drawCount = 0;
-        int seconds = 0;
-        int totalSeconds = 0;
+        double seconds = 0;
+        double totalSeconds = 0;
 
         while(gameThread != null) {
 
@@ -112,7 +112,8 @@ public class GamePanel extends JPanel implements Runnable {
             delta += (currentTime - lastTime) / drawInterval;
             timer += (currentTime - lastTime);
             lastTime = currentTime;
-            if (delta >= 1) { //delta >= 1
+            if (delta >= 1) {
+                //per frame
                 update();
                 drawToTempScreen();
                 drawToScreen();
@@ -129,10 +130,14 @@ public class GamePanel extends JPanel implements Runnable {
                         seconds++;
                     }
                     totalSeconds++;
+                } else if (FPS == 30) {
+                    if (gameState == PLAY_STATE) {
+                        seconds+=0.5;
+                    }
+                    totalSeconds+=0.5;
                 }
             }
             if(totalSeconds % 2 == 0){
-                //TODO: grid particle tick, and nextFrame for other objects
                 if(!LOADING && gameState == PLAY_STATE){
                     Tile[][] toAnimate = playerController.currentGrid.tiles;
                     for(int i = 0; i < rows; i++){
@@ -166,7 +171,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     private void update() {
         //KEEP UPDATE LOOP CLEAN
-
+        //called once per frame
+        repaint();
     }
 
     public void newGame(){
@@ -209,10 +215,12 @@ public class GamePanel extends JPanel implements Runnable {
     public void drawToTempScreen(){
         //debug
         long drawStart = 0;
+        this.draw(g2);
         if(keyH.checkDrawTime){
             drawStart = System.nanoTime();
         }
-        if(/*gameState == PLAY_STATE*/true && !LOADING){
+        //TODO
+        if(/*gameState == PLAY_STATE*/!LOADING){
             playerController.currentGrid.draw(g2);
         }
         if(gameState == TITLE_STATE){
@@ -272,13 +280,13 @@ public class GamePanel extends JPanel implements Runnable {
         for(Map.Entry<Entity, Integer> entry : sortedEntities){
             Entity entity = entry.getKey();
             int points = entry.getValue();
-            if (points >= pointsPerTurn) {
+            if(points >= pointsPerTurn){
                 if(entity == playerController.playerBody){
                     //player's turn
                     playerTurn = true;
                     entity.turnPoints = points - pointsPerTurn; //reset but keep remainder
                     //System.out.println("player turn processed");
-                } else {
+                }else{
                     //another entities turn
                     playerTurn = false;
                     entity.nextTurn();
@@ -296,5 +304,9 @@ public class GamePanel extends JPanel implements Runnable {
             //System.out.println(entity.name);
         }
         //System.out.println("finish method");
+    }
+    public void draw(Graphics g){
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
     }
 }

@@ -68,10 +68,53 @@ public class PlayerController {
     }
 
     public void processInput(int keyCode){
+        Tile moveTo = new Tile(false, null);
         if(canDo(keyCode)){
             //TODO: do things here
+            switch (keyCode){
+                case KeyEvent.VK_W:
+                    moveTo = currentGrid.tiles[playerBody.row][playerBody.col-1];
+                    if(moveTo.entity == null) {
+                        currentGrid.tiles[playerBody.row][playerBody.col-1].entity = playerBody;
+                        currentGrid.tiles[playerBody.row][playerBody.col].entity = null;
+                        playerBody.col -= 1;
+                    }else{
+                        //switch places with entity
+                    }
+                    break;
+                case KeyEvent.VK_A:
+                    moveTo = currentGrid.tiles[playerBody.row-1][playerBody.col];
+                    if(moveTo.entity == null) {
+                        currentGrid.tiles[playerBody.row-1][playerBody.col].entity = playerBody;
+                        currentGrid.tiles[playerBody.row][playerBody.col].entity = null;
+                        playerBody.row -= 1;
+                    }else{
+
+                    }
+                    break;
+                case KeyEvent.VK_S:
+                    moveTo = currentGrid.tiles[playerBody.row][playerBody.col+1];
+                    if(moveTo.entity == null) {
+                        currentGrid.tiles[playerBody.row][playerBody.col+1].entity = playerBody;
+                        currentGrid.tiles[playerBody.row][playerBody.col].entity = null;
+                        playerBody.col += 1;
+                    }else{
+                        //switch places with entity
+                    }
+                    break;
+                case KeyEvent.VK_D:
+                    moveTo = currentGrid.tiles[playerBody.row+1][playerBody.col];
+                    if(moveTo.entity == null) {
+                        currentGrid.tiles[playerBody.row+1][playerBody.col].entity = playerBody;
+                        currentGrid.tiles[playerBody.row][playerBody.col].entity = null;
+                        playerBody.row += 1;
+                    }else{
+
+                    }
+                    break;
+            }
         }
 
-        gp.keyH.storedCode = -9999;
+        //gp.keyH.storedCode = -9999;
     }
 }

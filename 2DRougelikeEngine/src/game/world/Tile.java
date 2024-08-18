@@ -135,7 +135,7 @@ public class Tile {
         if(gridEntity != null && !gridEntity.collision){
             return true;
         }
-        if(this.entity != null && this.entity.faction.hostile.contains(gamePanel.playerController.playerBody.faction)){
+        if(this.entity != null && this.entity.faction != null && this.entity.faction.hostile.contains(gamePanel.playerController.playerBody.faction)){
             return true;
         }
         return false;
