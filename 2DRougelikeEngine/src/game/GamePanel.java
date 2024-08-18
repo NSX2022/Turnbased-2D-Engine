@@ -172,7 +172,7 @@ public class GamePanel extends JPanel implements Runnable {
     private void update() {
         //KEEP UPDATE LOOP CLEAN
         //called once per frame
-        repaint();
+        //repaint();
     }
 
     public void newGame(){

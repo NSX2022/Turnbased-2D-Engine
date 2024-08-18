@@ -70,8 +70,8 @@ public class Grid {
     }
 
     public void draw(Graphics g){
-        for(int i = 0; i < rows-1; i++){
-            for(int j = 0; j < cols-1; j++){
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
                 tiles[i][j].draw(g);
             }
         }
