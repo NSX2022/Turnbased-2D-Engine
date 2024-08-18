@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     public SoundHandler sfx = new SoundHandler();
 
     //fps and rendering
-    private final int FPS = 30;
+    private final int FPS = 60;
     public int latestFPS;
     Graphics2D g2;
     Thread gameThread;
